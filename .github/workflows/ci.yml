@@ -43,18 +43,7 @@ jobs:
       - name: Build wheel
         run: python -m pip wheel . --no-deps -w dist
       - name: Verify wheel contents
-        run: |
-          python -c "
-          import zipfile, glob, sys
-          wheel = glob.glob('dist/*.whl')[0]
-          with zipfile.ZipFile(wheel) as z:
-              names = z.namelist()
-              assert any('rules/v1/rules.json' in n for n), 'rule pack missing'
-              assert any('nativetoolchain_doctor/cli.py' in n for n), 'package missing'
-              print('Wheel OK:', wheel)
-              for n in sorted(names):
-                  print(' ', n)
-          "
+        run: python scripts/verify_wheel.py
 
   live:
     if: github.event_name == 'workflow_dispatch'
