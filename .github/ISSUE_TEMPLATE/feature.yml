@@ -1,0 +1,47 @@
+name: Feature Request
+description: Suggest a new feature or rule
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion! Please describe the feature you'd like.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem does this solve? What Windows toolchain scenario is not covered?
+      placeholder: "When VS is installed in a non-standard location, vswhere doesn't find it..."
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How should the tool handle this? (new probe, new rule, fallback, etc.)
+      placeholder: "Add a probe that checks VSINSTALLDIR first..."
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - New probe
+        - New rule in existing pack
+        - New rule pack format
+        - CLI flag / output format
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: contributing
+    attributes:
+      label: Willing to contribute?
+      options:
+        - label: I can implement this
+        - label: I can test this on my machine
+        - label: I can write documentation
+        - label: I can only report the need

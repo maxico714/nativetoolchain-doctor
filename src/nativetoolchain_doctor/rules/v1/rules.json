@@ -1,0 +1,93 @@
+{
+  "rule_pack": "2026.10.1",
+  "rules": [
+    {
+      "id": "VS001",
+      "name": "Visual Studio Build Tools with VC tools",
+      "probe": "vs_install_path",
+      "expected": { "type": "non_empty" },
+      "severity": "error",
+      "fix_hint": "Install Visual Studio Build Tools 2022 with the Desktop development with C++ workload. This tool never installs anything."
+    },
+    {
+      "id": "VS002",
+      "name": "vcvarsall.bat available",
+      "probe": "vcvarsall_path",
+      "expected": { "type": "path_exists" },
+      "severity": "error",
+      "fix_hint": "Repair the VC++ build tools workload; vcvarsall.bat should exist under VC\\Auxiliary\\Build."
+    },
+    {
+      "id": "SDK001",
+      "name": "Windows 10/11 SDK installed",
+      "probe": "sdk_install",
+      "expected": { "type": "non_empty" },
+      "severity": "error",
+      "fix_hint": "Install the Windows 10/11 SDK with the Desktop C++ workload."
+    },
+    {
+      "id": "SDK002",
+      "name": "Windows SDK version 10.0 or newer",
+      "probe": "sdk_version",
+      "expected": { "type": "version_ge", "minimum": "10.0" },
+      "severity": "error",
+      "fix_hint": "Install a current Windows 10/11 SDK."
+    },
+    {
+      "id": "PY001",
+      "name": "Python 3.8+ available for node-gyp",
+      "probe": "python_version",
+      "expected": { "type": "version_ge", "minimum": "3.8" },
+      "severity": "error",
+      "fix_hint": "Install Python 3.8+ and ensure the python executable is on PATH."
+    },
+    {
+      "id": "NODE001",
+      "name": "Node.js available",
+      "probe": "node_version",
+      "expected": { "type": "non_empty" },
+      "severity": "error",
+      "fix_hint": "Install Node.js LTS and ensure node is on PATH."
+    },
+    {
+      "id": "NPM001",
+      "name": "npm available",
+      "probe": "npm_version",
+      "expected": { "type": "non_empty" },
+      "severity": "error",
+      "fix_hint": "npm ships with Node.js; repair the Node.js installation if it is missing."
+    },
+    {
+      "id": "GYP001",
+      "name": "node-gyp MSVS version compatible",
+      "probe": "msvs_version",
+      "expected": { "type": "msvs_compatible", "vs_major": "2022" },
+      "severity": "warn",
+      "fix_hint": "If node-gyp picks the wrong toolset, run: npm config set msvs_version 2022"
+    },
+    {
+      "id": "ENV001",
+      "name": "WindowsSdkDir is valid when set",
+      "probe": "sdk_env",
+      "expected": { "type": "sdk_env_valid" },
+      "severity": "warn",
+      "fix_hint": "If you set WindowsSdkDir manually, point it at the installed SDK root or unset it and let the registry fallback work."
+    },
+    {
+      "id": "ENV002",
+      "name": "INCLUDE/LIB paths are valid when set",
+      "probe": "compile_env",
+      "expected": { "type": "compile_env_valid" },
+      "severity": "warn",
+      "fix_hint": "Do not set INCLUDE/LIB globally; run vcvarsall.bat in the same shell instead."
+    },
+    {
+      "id": "PATH001",
+      "name": "cl.exe visibility (informational)",
+      "probe": "cl_path",
+      "expected": { "type": "optional" },
+      "severity": "info",
+      "fix_hint": "Run the printed vcvarsall.bat line before invoking node-gyp; do not add cl.exe to the global PATH."
+    }
+  ]
+}

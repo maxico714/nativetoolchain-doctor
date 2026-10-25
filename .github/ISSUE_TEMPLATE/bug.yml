@@ -1,0 +1,65 @@
+name: Bug Report
+description: Report a bug in nativetoolchain-doctor
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill in the sections below.
+  - type: input
+    id: command
+    attributes:
+      label: Command run
+      description: The exact command you ran (including flags)
+      placeholder: nativetoolchain-doctor run --json
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Full output
+      description: Paste stdout and stderr (or attach the --bundle file)
+      render: text
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      description: Output of `ver` or `systeminfo /FO LIST | findstr /B /C:"OS Name" /C:"OS Version"`
+      placeholder: Windows 11 Pro 10.0.26200
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      description: Output of `python --version`
+      placeholder: Python 3.12.10
+    validations:
+      required: true
+  - type: checkboxes
+    id: toolchain
+    attributes:
+      label: Toolchain status
+      description: What is installed on the machine?
+      options:
+        - label: Visual Studio Build Tools with C++ workload
+        - label: Windows SDK
+        - label: Node.js / npm
+        - label: Python 3.8+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead?
+    validations:
+      required: true
