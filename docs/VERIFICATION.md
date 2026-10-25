@@ -67,6 +67,21 @@ python -m venv .venv
 
 Verified: install succeeds, command runs, output matches expectations.
 
+Re-run 2026-10-25 from a fresh clone of the local repository (commit `97b5f1d`):
+
+```text
+git clone <local repo> ntd-clone
+python -m venv --system-site-packages .venv
+.venv/Scripts/python.exe -m pip install --no-build-isolation .
+# install exit 0, console script created
+.venv/Scripts/nativetoolchain-doctor.exe run --json
+# exit 0, 11 rules, rule pack 2026.10.1
+python -m pytest --tb=no -q
+# exit 0, 83 tests collected
+```
+
+Note: a plain `python -m venv` on Python 3.12 has no setuptools, so `--no-build-isolation` fails until setuptools is present. Either allow build isolation (downloads setuptools) or use `--system-site-packages` as above.
+
 ## L5 — Adversarial & security
 
 | Test | Result |

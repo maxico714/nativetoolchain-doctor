@@ -31,7 +31,7 @@ Rule pack: JSON (stdlib-only), 11 rules, versioned `2026.10.1`.
 | L1/L2 | `python -m pytest --tb=no -q` | Exit 0; 83 tests collected (82 excluding `live`) |
 | L3 | `python -m nativetoolchain_doctor run --json` | Exit 0; 11 rules evaluated on this host; rule pack `2026.10.1` |
 | PKG | `python -m pip wheel . --no-deps -w dist` | Built `nativetoolchain_doctor-0.1.0-py3-none-any.whl`, 16,976 bytes, sha256 `ea3f5549…c74a` |
-| L4 | fresh clone install and README quickstart | NOT yet re-run after the initial commit; run before requesting G2 |
+| L4 | Fresh clone of commit `97b5f1d`, `pip install --no-build-isolation .` in a venv, `run --json`, `pytest` | Passed 2026-10-25: install exit 0, CLI exit 0, tests exit 0 (83 collected) |
 
 The earlier 2026-10-23 table recorded a 14.5 KB wheel and did not note that the repository had no commits. Both are corrected above from commands run on 2026-10-25.
 
