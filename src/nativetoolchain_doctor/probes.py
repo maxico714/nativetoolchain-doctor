@@ -230,8 +230,10 @@ def probe_msvs_version(ctx: ProbeContext) -> ProbeResult:
         return ProbeResult("", "npm not found; msvs_version cannot be read")
     try:
         proc = ctx.run([npm, "config", "get", "msvs_version"])
-    except (FileNotFoundError, subprocess.TimeoutExpired, OSError) as exc:
-        return ProbeResult("", f"npm config failed: {exc}")
+    except subprocess.TimeoutExpired:
+        return ProbeResult("unknown", "npm config timed out; msvs_version could not be checked")
+    except (FileNotFoundError, OSError) as exc:
+        return ProbeResult("unknown", f"npm config failed: {exc}")
     value = (proc.stdout or "").strip()
     if value in ("", "undefined", "null"):
         return ProbeResult("", "msvs_version not set; node-gyp will auto-detect")

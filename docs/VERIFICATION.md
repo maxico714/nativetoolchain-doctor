@@ -19,15 +19,15 @@ mypy src
 
 ```powershell
 python -m pytest -q --tb=short
-# 83 passed in ~3s
+# 84 passed in ~3s
 ```
 
 Test breakdown:
-- `tests/unit/test_rules.py` — 12 tests (rule loading, validation, errors)
-- `tests/unit/test_engine.py` — 16 tests (evaluation, report, custom packs)
-- `tests/unit/test_probes.py` — 30 tests (all probe behaviors)
+- `tests/unit/test_rules.py` — 13 tests (rule loading, validation, errors)
+- `tests/unit/test_engine.py` — 17 tests (evaluation, report, custom packs)
+- `tests/unit/test_probes.py` — 28 tests (all probe behaviors)
 - `tests/unit/test_report.py` — 3 tests (JSON/text/bundle rendering)
-- `tests/integration/test_cli.py` — 9 tests (CLI commands, bundle, error codes)
+- `tests/integration/test_cli.py` — 11 tests (CLI commands, bundle, error codes)
 - `tests/security/test_readonly.py` — 6 tests (no writes, redaction, no shell, no registry writes)
 - `tests/adversarial/test_adversarial.py` — 5 tests (empty env, huge env, corrupt SDK, unversioned SDK dirs, Unicode paths)
 - `tests/live/test_live.py` — 1 test (host live run, skipped in CI, run manually)
@@ -77,7 +77,7 @@ python -m venv --system-site-packages .venv
 .venv/Scripts/nativetoolchain-doctor.exe run --json
 # exit 0, 11 rules, rule pack 2026.10.1
 python -m pytest --tb=no -q
-# exit 0, 83 tests collected
+# exit 0, 84 tests collected
 ```
 
 Note: a plain `python -m venv` on Python 3.12 has no setuptools, so `--no-build-isolation` fails until setuptools is present. Either allow build isolation (downloads setuptools) or use `--system-site-packages` as above.

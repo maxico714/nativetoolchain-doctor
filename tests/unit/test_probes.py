@@ -217,6 +217,15 @@ def test_msvs_without_npm() -> None:
     assert probe_msvs_version(make_context()).value == ""
 
 
+def test_msvs_probe_failure_is_unknown() -> None:
+    def timeout(_argv, timeout: float):
+        raise subprocess.TimeoutExpired(cmd="npm", timeout=timeout)
+
+    result = probe_msvs_version(make_context(which={"npm": "npm.cmd"}, runner=timeout))
+    assert result.value == "unknown"
+    assert "timed out" in result.detail
+
+
 def test_sdk_env_probe(tmp_path: Path) -> None:
     assert probe_sdk_env(make_context()).value == ""
     assert probe_sdk_env(make_context(env={"WindowsSdkDir": str(tmp_path)})).value == str(tmp_path)

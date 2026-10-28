@@ -71,6 +71,7 @@ def test_msvs_compatible() -> None:
     assert check(rule, "2022") == "pass"
     assert check(rule, "17.0") == "pass"
     assert check(rule, "2019") == "warn"
+    assert check(rule, "unknown") == "warn"
 
 
 def test_optional_always_passes() -> None:
